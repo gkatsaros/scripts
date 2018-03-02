@@ -31,7 +31,7 @@ class S(BaseHTTPRequestHandler):
         self._set_headers()
         request_path = self.path
         name = request_path.split('=')
-        if name[1]:
+        if len(name) > 1:
             if name[1]=='alice':
 
                 random_ip = '192.168.1.1'
