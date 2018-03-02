@@ -29,7 +29,19 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        random_ip = socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff)))
+        request_path = self.path
+        name = request_path.split('=')
+        if name[1]:
+            if name[1]=='alice':
+
+                random_ip = '192.168.1.1'
+            elif name[1]=='tom':
+                random_ip = '192.168.1.2'
+            else:
+                random_ip = socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff)))
+        else:
+            random_ip = socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff)))
+            
         self.wfile.write(random_ip)
 
     def do_HEAD(self):

@@ -26,9 +26,9 @@ class S(BaseHTTPRequestHandler):
         #for line in content:
         #    print(line)
         ipam_server_ip = content[0].replace('\n', '')
-        name={'user':content[1].replace('\n', '')}
+        name=content[1].replace('\n', '')
 
-        request = Request('http://'+ipam_server_ip+':8888',params=name)
+        request = Request('http://'+ipam_server_ip+':8888?username='+name)
         try:
 	        response = urlopen(request)
 	        returned_ip = response.read()
