@@ -18,7 +18,7 @@ class S(BaseHTTPRequestHandler):
         filename = "/opt/ipam_ip"
         # The function readlines() reads the file.             
         with open(filename) as f:
-               content = f.readlines()
+            content = f.readlines()
  
         # Show the file contents line by line.
         # We added the comma to print single newlines and not double newlines.
