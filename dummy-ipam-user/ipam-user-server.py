@@ -18,15 +18,17 @@ class S(BaseHTTPRequestHandler):
         filename = "/opt/ipam_ip"
         # The function readlines() reads the file.             
         with open(filename) as f:
-        content = f.readlines()
+               content = f.readlines()
  
         # Show the file contents line by line.
         # We added the comma to print single newlines and not double newlines.
         # This is because the lines contain the newline character '\n'. 
-        for line in content:
-            print(line)
+        #for line in content:
+        #    print(line)
+        ipam_server_ip = content[0].replace('\n', '')
+        name={'user':content[1].replace('\n', '')}
 
-        request = Request('http://'+line+':8888')
+        request = Request('http://'+ipam_server_ip+':8888',params=name)
         try:
 	        response = urlopen(request)
 	        returned_ip = response.read()
