@@ -5,18 +5,6 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 
 
-def getopts(argv):
-    opts = {}  # Empty dictionary to store key-value pairs.
-    while argv:  # While there are arguments left to parse...
-        if argv[0][0] == '-':  # Found a "-name value" pair.
-            opts[argv[0]] = argv[1]  # Add key and value to the dictionary.
-        argv = argv[1:]  # Reduce the argument list by copying it starting from index 1.
-    return opts
-
-myargs = getopts(argv)
-if '-ip' in myargs:  # Example usage.
-    ip = myargs['-ip']
-
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -26,7 +14,20 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        request = Request('http://'+ip+':8888')
+
+        filename = "/opt/ipam_ip"
+        # Open the file as f.
+        # The function readlines() reads the file.             
+        with open(filename) as f:
+        content = f.readlines()
+ 
+        # Show the file contents line by line.
+        # We added the comma to print single newlines and not double newlines.
+        # This is because the lines contain the newline character '\n'. 
+        for line in content:
+            print(line)
+
+        request = Request('http://'+line+':8888')
         try:
 	        response = urlopen(request)
 	        returned_ip = response.read()
